@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Phase 10</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-gray-100">
+
+    <div id='wrapper' class='container mx-auto px-5 py-6 shadow-md rounded bg-white rounded-md overflow-hidden'>
+        <!-- ko foreach: players -->
+        <div class="grid grid-cols-3 gap-1">
+            <div class="col-span-1">
+                <img data-bind="attr: { src: `assets/images/${imgsrc()}`}, click: changePic" alt='avatar'
+                    style="width: 80px; height: 80px; border-radius: 50px;" />
+            </div>
+            <div class="col-span-1">
+                <div class="grid grid-cols-4 gap-1">
+                    <div class="col-span-1">
+                        <span data-bind="text: names"></span><br />
+                        <input type="text" placeholder="score" data-bind="value: score" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+                    </div>
+                    <div class="col-span-2">
+                        <select data-bind="options: levels, optionsCaption: 'Select...', value: level" class=""></select><br />
+                        <select data-bind="options: scores, optionsText: 'text', optionsCaption: 'scorecard...'" class=""></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <span data-bind="text: scoreTotal"></span>
+                <button data-bind="click: removePlayer">&times;</button>
+            </div>
+        </div>
+        <hr/>
+        <!-- /ko -->
+
+        <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
+            <input type="text" data-bind="value: playerName" placeholder="Player Names" class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none" />
+            <button data-bind="click: addPlayer" class="flex-shrink-0 bg-gray-200 hover:bg-gray-500 border-gray-200 hover:border-gray-500 text-sm border-4 text-gray py-1 px-2 rounded">
+                Add
+            </button>
+        </div>
+
+    </div>
+
+
+
+
+    <script type='text/javascript'
+        src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

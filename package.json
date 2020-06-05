@@ -1,0 +1,11 @@
+{
+  "name": "phase10",
+  "version": "1.0.0",
+  "description": "phase 10 scoreboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kimana",
+  "license": "ISC"
+}
