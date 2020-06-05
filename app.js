@@ -1,7 +1,7 @@
 // check out https://github.com/adamhaile/surplus
 var app = (function () {
     var self = this,
-        pics = ['jokes.png', 'chile.png', 'arif.png'],
+        pics = ['jokes.png', 'chile.png', 'arif.png', 'chile2.png', 'arif2.png', 'chile3.png', 'arif3.png'],
 
         playerDara = function (pname) {
             let me = this;
