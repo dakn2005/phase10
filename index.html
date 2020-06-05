@@ -3,44 +3,60 @@
 <html>
 
 <head>
-    <title>Phase 10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 10 scoreboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body class="bg-gray-100">
 
-    <div id='wrapper' class='container  mx-auto px-5 py-6 shadow-md rounded bg-white rounded-md overflow-hidden'>
+    <p class="text-4xl md:text-6xl w-full text-center" style="font-family: 'Monoton', cursive;">Phase 10</p>
+
+    <div id='wrapper' class='container mx-auto px-5 py-6 shadow-md rounded bg-white rounded-md'>
         <!-- ko foreach: players -->
-        <div class="grid grid-cols-3 gap-1">
-            <div class="col-span-1">
+        <div class="flex flex-wrap mt-20">
+            
+            <!-- avatar -->
+            <div class="md:w-1/5">
                 <img data-bind="attr: { src: `assets/images/${imgsrc()}`}, click: changePic" alt='avatar'
-                    style="width: 80px; height: 80px; border-radius: 50px;" class="text-center w-full" />
+                    style="width: 80px; height: 80px; border-radius: 40px;" class="text-center w-full" />
                 <br />
-                <p data-bind="text: names" class="w-full px-3 pl-4 leading-tight"></p>
+                <p data-bind="text: names" class="text-2xl w-full px-3 pl-4 leading-tight"></p>
             </div>
-            <div class="col-span-1">
-                <div class="grid grid-cols-4 gap-1">
-                    <div class="col-span-2">
-                        <div class="relative">
-                            <select data-bind="options: levels, optionsCaption: 'Select...', value: level"
-                                class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select><br />
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </div>
+
+            <!-- level score -->
+            <div class="md:w-1/4 py-5">
+             
+                    <div class="relative w-24">
+                        <select data-bind="options: levels, optionsCaption: 'Select...', value: level"
+                            class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select><br />
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
                         </div>
-                        <input type="text" placeholder="score" data-bind="value: score"
-                            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
                     </div>
-                </div>
+                    <div class="relative">
+                        <input type="text" placeholder="score" data-bind="value: score"
+                            class="text-2xl md:text-5xl bg-gray-200 appearance-none w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white" />
+                            
+                        <div class="pointer-events-auto absolute inset-y-0 right-0 flex items-center px-2 text-green-700">
+                            <button data-bind="click: addScore" class="bg-green-500 leading-tight rounded text-white h-8 md:h-16 cursor-pointer w-10">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                
             </div>
-            <div class="col-span-1">
-                <span data-bind="text: scoreTotal"></span>
+
+            <!-- Score card -->
+            <div class="md:w-1/4 m-5">
+
+                <span data-bind="text: scoreTotal" class="text-4xl"></span>
 
                 <div class="relative w-32">
                     <select data-bind="options: scores, optionsText: 'text', optionsCaption: 'scorecard...'"
@@ -50,18 +66,28 @@
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                     </div>
-
+                    
                 </div>
-                <button data-bind="click: removePlayer">&times;</button>
+
+                <button data-bind="click: popScore" class="text-white bg-orange-500 rounded text-xs p-1 mt-2">
+                    delete last score
+                </button>
+
             </div>
+
+            <!-- actions -->
+            <div class="md:w-1/5 px-10 py-10">
+                <button data-bind="click: removePlayer" class="text-4xl text-center text-red-500 p-4">&times;</button>
+            </div>
+
         </div>
         <hr />
         <!-- /ko -->
 
         <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
-            <input type="text" data-bind="value: playerName" placeholder="Player Names"
+            <input type="text" data-bind="textInput: playerName, event: {keypress: onEnter}" placeholder="Player Names"
                 class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none" />
-            <button data-bind="click: addPlayer"
+            <button id='btnadd' data-bind="click: addPlayer"
                 class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">
                 Add
             </button>
@@ -69,7 +95,14 @@
 
     </div>
 
-
+    <script>
+        // Warning before leaving the page (back button, or outgoinglink)
+        window.onbeforeunload = function() {
+           return "Data will be lost if you leave the page, are you sure?";
+           //if we return nothing here (just calling return;) then there will be no pop-up question at all
+           //return;
+        };
+        </script>
 
 
     <script type='text/javascript'
