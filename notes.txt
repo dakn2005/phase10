@@ -1,0 +1,7 @@
+Future features
+- real time scoreboard for all members; use node, socketIO
+- save game data (for future continuing game ?!)
+
+Articles
+- why I use 10 year old ko framework
+- Use modern framework - surplus.js is suggested; or feather js ;

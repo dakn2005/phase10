@@ -13,13 +13,15 @@
 var app = (function () {
     var self = this,
         pics = ['jokes.png', 'chile.png', 'arif.png', 'chile2.png', 'arif2.png', 'chile3.png', 'arif3.png'],
+        gamelevels = [...Array(10).keys()].map(k => k + 1), //.map(nk => `level ${nk}`),
 
         playerDara = function (pname) {
             let me = this;
             me.picClickCount = ko.observable(0)
+            me.nextLevel = ko.observable(false);
             me.imgsrc = ko.observable(pics[0]);
             me.names = ko.observable(pname.toLowerCase().charAt(0).toUpperCase() + pname.toLowerCase().slice(1));
-            me.level = ko.observable('level 1');
+            me.level = ko.observable(1);
             me.img = ko.observable();
             me.score = ko.observable();
             me.scores = ko.observableArray([]);
@@ -34,10 +36,15 @@ var app = (function () {
                     me.scores.push({
                         level: me.level(),
                         score: me.score(),
-                        text: self.isUno() ? `${me.score()}pts` : `${me.level()} - ${me.score()}`
+                        text: self.isUno() ?  `${me.score()}pts` : `level ${me.level()} - ${me.score()}`
                     });
 
                     me.score('');
+
+                    if (me.nextLevel()){
+                        me.level(parseInt(me.level()) + 1)
+                        me.nextLevel(false);
+                    }
                 }
             }
             // me.score.subscribe((newval) => {
@@ -51,6 +58,11 @@ var app = (function () {
             me.resetScores = () => {
                 if (confirm('Reset all scores?'))
                     me.scores([]);
+            }
+
+            me.levelUp = () =>{
+                me.nextLevel(true);
+                Snackbar.show({text: `${me.names()} has moved to the next level (score updated after recording current score)`, pos: 'top-center', duration: 1500});
             }
 
             me.changePic = () => {
@@ -71,9 +83,12 @@ var app = (function () {
         },
 
         vm = function () {
-            self.playerName = ko.observable('susan');
+            self.playerName = ko.observable('');
             self.players = ko.observableArray([]);
-            self.levels = [...Array(10).keys()].map(k => k + 1).map(nk => `level ${nk}`);
+            self.levels = gamelevels.map(k => ({
+                text: `level ${k}`,
+                value: k
+            }));
             self.isUno = ko.observable(false);
 
             self.onPlayerEnter = (d, e) => onEnter(e, self.addPlayer)
@@ -111,8 +126,7 @@ var app = (function () {
 
         anza = () => {
             ko.applyBindings(new vm(), document.getElementById('bory'))
-            document.getElementById('btnadd').click();
-
+            // document.getElementById('btnadd').click();
         }
 
     return { anza: anza }

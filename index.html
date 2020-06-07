@@ -9,6 +9,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="pretty-checkbox.min.css" rel="stylesheet" />
+    <link href="assets/plugins/snackbar/snackbar.min.css" rel='stylesheet' />
     <link href="styles.css" rel="stylesheet" />
 </head>
 
@@ -53,15 +54,29 @@
             <div class="md:w-1/4 py-5">
                 <div class="w-24" data-bind="visible: isUno()">&nbsp;</div>
 
-                <div class="relative w-24 bg-transparent" data-bind="visible: !isUno()">
-                    <select data-bind="options: levels, optionsCaption: 'Select...', value: level"
-                        class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select><br />
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
+                <div class="flex mb-1" data-bind="visible: !isUno()">
+
+                    <div class="relative w-20 bg-transparent" >
+                        <select
+                            data-bind="options: levels, optionsText: 'text', optionsValue:'value', optionsCaption: 'Select...', value: level"
+                            class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select><br />
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4 -mt-2" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
                     </div>
+
+
+                    <button data-bind="click: levelUp"
+                        class="bg-white hover:bg-gray-100 text-gray-800 border-gray-200 rounded-full shadow text-xs p-1 ml-2">
+                        level up <i class="fas fa-level-up-alt"></i>
+                    </button>
+
                 </div>
+
 
                 <div class="relative">
                     <input type="text" placeholder="score" data-bind="textInput: score, event: {keypress: onScore}"
@@ -96,8 +111,9 @@
                     <button data-bind="click: popScore" class="text-white bg-orange-500 rounded-full text-xs p-1 mt-2">
                         delete last score
                     </button>
-                    <button data-bind="click: resetScores" class="text-white bg-red-700 rounded-full text-xs p-1 mt-2 ml-2">
-                       reset scores
+                    <button data-bind="click: resetScores"
+                        class="text-white bg-red-700 rounded-full text-xs p-1 mt-2 ml-2">
+                        reset scores
                     </button>
                 </div>
 
@@ -135,10 +151,10 @@
             //return;
         };
     </script>
-
-
-    <script type='text/javascript'
-        src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
+    <script src="assets/plugins/snackbar/jquery-2.2.0.min.js"></script>
+    <script src="assets/plugins/snackbar/materialize.min.js"></script>
+    <script src="assets/plugins/snackbar/snackbar.min.js"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
     <script src="app.js"></script>
 
 </body>
