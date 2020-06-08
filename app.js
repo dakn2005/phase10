@@ -29,19 +29,19 @@ var app = (function () {
                 (a, n) => parseInt(a) + parseInt(n), 0
             ));
 
-            me.onScore = (d, e) => onEnter(e, me.addScore);
+            me.onScore = (d, e) => onEnter(e, me.addScore, true);
 
             me.addScore = () => {
                 if (!!me.score() && me.score() !== '') {
                     me.scores.push({
                         level: me.level(),
                         score: me.score(),
-                        text: self.isUno() ?  `${me.score()}pts` : `level ${me.level()} - ${me.score()}`
+                        text: self.isUno() ? `${me.score()}pts` : `level ${me.level()} - ${me.score()}`
                     });
 
                     me.score('');
 
-                    if (me.nextLevel()){
+                    if (me.nextLevel()) {
                         me.level(parseInt(me.level()) + 1)
                         me.nextLevel(false);
                     }
@@ -60,9 +60,9 @@ var app = (function () {
                     me.scores([]);
             }
 
-            me.levelUp = () =>{
+            me.levelUp = () => {
                 me.nextLevel(true);
-                Snackbar.show({text: `${me.names()} has moved to the next level (score updated after recording current score)`, pos: 'top-center', duration: 1500});
+                Snackbar.show({ text: `${me.names()} has moved to the next level (score updated after recording current score)`, pos: 'top-center', duration: 1500 });
             }
 
             me.changePic = () => {
@@ -75,9 +75,13 @@ var app = (function () {
             }
         },
 
-        onEnter = (e, func) => {
+        onEnter = (e, func, numonly) => {
+            let regx = /[0-9]/g
+
             if (e.keyCode === 13)
                 func()
+            else if (!regx.test(e.key) && numonly)
+                return false;
             else
                 return true
         },

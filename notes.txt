@@ -1,6 +1,7 @@
 Future features
 - real time scoreboard for all members; use node, socketIO
 - save game data (for future continuing game ?!)
+- add range type for levels - replace select
 
 Articles
 - why I use 10 year old ko framework
