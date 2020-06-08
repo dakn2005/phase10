@@ -1,5 +1,4 @@
-## [Phase 10 & Uno Scoreboard](https://dakn2005.github.io/phase10/)
----
+## Phase 10 & Uno Scoreboard [link](https://dakn2005.github.io/phase10/)
 ### _motivation_
 A project to explore tailwindcss in app design <br/>
 main tech: 
