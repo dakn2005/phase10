@@ -56,13 +56,19 @@ var app = (function () {
             }
 
             me.resetScores = () => {
-                if (confirm('Reset all scores?'))
+                if (confirm('Reset player scores?')){
                     me.scores([]);
+                    me.level(1);
+                }
             }
 
             me.levelUp = () => {
                 me.nextLevel(true);
-                Snackbar.show({ text: `${me.names()} has moved to the next level (score updated after recording current score)`, pos: 'top-center', duration: 1500 });
+                Snackbar.show({ 
+                    text: `${me.names()} has moved to the next level (score updated after recording current score)`, 
+                    pos: 'bottom-center', 
+                    duration: 2000 
+                });
             }
 
             me.changePic = () => {
@@ -115,8 +121,17 @@ var app = (function () {
             //     //     return !nv
             // })
 
+            self.resetAllScores = () => {
+                if (confirm('Reset all players\' scores?')) {
+                   self.players().map(ply=>{
+                       ply.scores([])
+                       ply.level(1)
+                   })
+                }
+            }
+
             self.reset = () => {
-                if (confirm('Reset all?')) {
+                if (confirm('Reset game, remove all players?')) {
                     self.playerName('')
                     self.players([])
                 }

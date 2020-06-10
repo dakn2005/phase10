@@ -125,17 +125,23 @@
         <hr />
         <!-- /ko -->
 
-        <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
+        <div class="flex items-center border-b border-b-2 border-indigo-800 py-2">
             <input type="text" data-bind="textInput: playerName, event: {keypress: onPlayerEnter}"
                 placeholder="Player Names" class="appearance-none w-full py-2 px-3 text-gray-700 focus:outline-none" />
+
             <button id='btnadd' data-bind="click: addPlayer"
                 class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">
                 Add
             </button>
 
+            <button id='btnadd' data-bind="click: resetAllScores"
+                class="bg-orange-300 hover:bg-orange-400 text-black font-bold py-2 px-4 border-b-4 border-orange-500 hover:border-orange-500 rounded ml-4 w-56">
+                Reset Scores
+            </button>
+
             <button id='btnadd' data-bind="click: reset"
-                class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4">
-                Reset
+                class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4 w-56">
+                Reset Game
             </button>
         </div>
 
