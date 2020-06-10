@@ -13,6 +13,12 @@
     <link href="pretty-checkbox.min.css" rel="stylesheet" />
     <link href="assets/plugins/snackbar/snackbar.min.css" rel='stylesheet' />
     <link href="styles.css" rel="stylesheet" />
+
+    <style>
+        .snack-margin{
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body id='bory' class="bg-gray-100">
@@ -134,14 +140,14 @@
                 Add
             </button>
 
-            <button id='btnadd' data-bind="click: resetAllScores"
-                class="bg-orange-300 hover:bg-orange-400 text-black font-bold py-2 px-4 border-b-4 border-orange-500 hover:border-orange-500 rounded ml-4 w-56">
+            <!-- <button id='btnadd' data-bind="click: resetAllScores"
+                class="bg-orange-300 hover:bg-orange-400 text-black font-bold py-2 px-4 border-b-4 border-orange-500 hover:border-orange-500 rounded ml-4 md:w-56">
                 Reset Scores
-            </button>
+            </button> -->
 
             <button id='btnadd' data-bind="click: reset"
-                class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4 w-56">
-                Reset Game
+                class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4 md:w-56">
+                Reset
             </button>
         </div>
 

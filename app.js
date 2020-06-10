@@ -56,7 +56,7 @@ var app = (function () {
             }
 
             me.resetScores = () => {
-                if (confirm('Reset player scores?')){
+                if (confirm('Reset player scores?')) {
                     me.scores([]);
                     me.level(1);
                 }
@@ -64,10 +64,12 @@ var app = (function () {
 
             me.levelUp = () => {
                 me.nextLevel(true);
-                Snackbar.show({ 
-                    text: `${me.names()} has moved to the next level (score updated after recording current score)`, 
-                    pos: 'bottom-center', 
-                    duration: 2000 
+                Snackbar.show({
+                    text: `${me.names()} has moved to the next level (score updated after recording current score)`,
+                    pos: 'top-center',
+                    duration: 2000, 
+                    showAction: false,
+                    customClass: 'snack-margin'
                 });
             }
 
@@ -123,10 +125,10 @@ var app = (function () {
 
             self.resetAllScores = () => {
                 if (confirm('Reset all players\' scores?')) {
-                   self.players().map(ply=>{
-                       ply.scores([])
-                       ply.level(1)
-                   })
+                    self.players().map(ply => {
+                        ply.scores([])
+                        ply.level(1)
+                    })
                 }
             }
 
