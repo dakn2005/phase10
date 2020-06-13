@@ -18,7 +18,8 @@ var app = (function () {
         playerDara = function (pname) {
             let me = this;
             me.picClickCount = ko.observable(0)
-            me.nextLevel = ko.observable(false);
+            me.moveToNextLevel = ko.observable(false);
+            me.nextLevel = ko.observable();
             me.imgsrc = ko.observable(pics[0]);
             me.names = ko.observable(pname.toLowerCase().charAt(0).toUpperCase() + pname.toLowerCase().slice(1));
             me.level = ko.observable(1);
@@ -41,9 +42,9 @@ var app = (function () {
 
                     me.score('');
 
-                    if (me.nextLevel()) {
+                    if (me.moveToNextLevel()) {
                         me.level(parseInt(me.level()) + 1)
-                        me.nextLevel(false);
+                        me.moveToNextLevel(false);
                     }
                 }
             }
@@ -62,8 +63,13 @@ var app = (function () {
                 }
             }
 
+            me.onChange = () =>{
+                me.moveToNextLevel(false)
+            }
+
             me.levelUp = () => {
-                me.nextLevel(true);
+                me.moveToNextLevel(true);
+                me.nextLevel(parseInt(me.level()) + 1)
                 Snackbar.show({
                     text: `${me.names()} has moved to the next level (score updated after recording current score)`,
                     pos: 'top-center',

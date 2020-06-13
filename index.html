@@ -49,7 +49,6 @@
                     class="text-4xl text-right text-red-500 p-4 md:w-2/4 md:ml-24 pr-8 w-full absolute">&times;</button>
             </div>
 
-
             <!-- avatar -->
             <div class="md:w-1/4">
                 <img data-bind="attr: { src: `assets/images/${imgsrc()}`}, click: changePic" alt='avatar'
@@ -66,7 +65,7 @@
 
                     <div class="relative w-20 bg-transparent">
                         <select
-                            data-bind="options: levels, optionsText: 'text', optionsValue:'value', optionsCaption: 'Select...', value: level"
+                            data-bind="options: levels, optionsText: 'text', optionsValue:'value', optionsCaption: 'Select...', value: level, event: { change: onChange }"
                             class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select><br />
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -77,9 +76,12 @@
                         </div>
                     </div>
 
+                    <p data-bind="visible: moveToNextLevel()" class="text-xs italic font-hairline">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> level <span data-bind="text: nextLevel"></span>
+                    </p>
 
-                    <button data-bind="click: levelUp"
-                        class="bg-white hover:bg-gray-100 text-gray-800 border-gray-200 rounded-full shadow text-xs p-1 ml-2">
+                    <button data-bind="click: levelUp, visible: !moveToNextLevel()"
+                    class="bg-white  hover:bg-gray-100 text-gray-800 border-gray-200 rounded-full shadow text-xs p-1 ml-2">
                         level up <i class="fas fa-level-up-alt"></i>
                     </button>
 
