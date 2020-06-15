@@ -15,7 +15,7 @@
     <link href="styles.css" rel="stylesheet" />
 
     <style>
-        .snack-margin{
+        .snack-margin {
             margin-top: 10px;
         }
     </style>
@@ -77,11 +77,12 @@
                     </div>
 
                     <p data-bind="visible: moveToNextLevel()" class="text-xs italic font-hairline">
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i> level <span data-bind="text: nextLevel"></span>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> level <span
+                            data-bind="text: nextLevel"></span>
                     </p>
 
                     <button data-bind="click: levelUp, visible: !moveToNextLevel()"
-                    class="bg-white  hover:bg-gray-100 text-gray-800 border-gray-200 rounded-full shadow text-xs p-1 ml-2">
+                        class="bg-white  hover:bg-gray-100 text-gray-800 border-gray-200 rounded-full shadow text-xs p-1 ml-2">
                         level up <i class="fas fa-level-up-alt"></i>
                     </button>
 
@@ -169,6 +170,18 @@
     <script type='text/javascript'
         src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
     <script src="app.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72814195-14"></script>
+    
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-72814195-14');
+    </script>
+
 
 </body>
 
