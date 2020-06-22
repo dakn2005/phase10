@@ -6,9 +6,9 @@ main tech:
 - tailwindcss
 
 ### _recommendations_
-- use modern/updated (micro)frameworks/libraries; suggested surplus.js, feather js, react
+- use newer micro libraries; suggested alpine.js, surplus.js
 
 ### _future features_
-- real time scoreboard for all members; use node, socketIO
-- save game data (current game state to be continued)
+- real time scoreboard for all members; node, socketIO
+- save game data (current game state)
 - add range type for levels - replace select control
