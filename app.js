@@ -155,7 +155,7 @@ var app = (function () {
             self.shareableUrl = ko.pureComputed(() => {
                 let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
                 // return `whatsapp://send?text=${urlstr}`;
-                return `https://api.whatsapp.com/send?text=${encodeURIComponent(urlstr)}`
+                return `https://api.whatsapp.com/send?text=${urlstr}`
             })
 
             // self.sharePlayerData = () => {
