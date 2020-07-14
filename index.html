@@ -109,10 +109,12 @@
                 <span data-bind="text: scoreTotal" class="text-4xl"></span>
 
                 <div class="relative w-40 bg-transparent">
-                    <select data-bind="options: scores, optionsText: 'text', optionsCaption: 'scorecard [' + scores().length + ' ' + (scores().length > 1 ? 'games' : 'game') + ']' "
+                    <select
+                        data-bind="options: scores, optionsText: 'text', optionsCaption: 'scorecard [' + scores().length + ' ' + (scores().length > 1 ? 'games' : 'game') + ']' "
                         class="appearance-none w-full text-gray-700 leading-tight focus:outline-none focus:bg-white"></select>
-                        
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center -mr-4 px-2 text-gray-700">
+
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center -mr-4 px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
@@ -153,11 +155,13 @@
                 class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4 md:w-56">
                 Reset
             </button>
-            
-            <button data-bind="click: sharePlayerData" class="border-transparent text-sm rounded ml-4 bg-gray-100 border-b-4 border-gray-200 py-2 px-4 md:w-32 flex-shrink-2">
-                <i class="fa fa-share-alt" aria-hidden="true"></i> 
+
+            <a target="_blank" data-bind="attr: {href: shareableUrl, title: 'share'}"
+                data-action="share/whatsapp/share"
+                class="cursor-pointer border-transparent text-sm rounded ml-4 bg-gray-100 border-b-4 border-gray-200 py-2 px-4 md:w-32 flex-shrink-2">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
                 <span class="share">share</span>
-            </button>
+            </a>
         </div>
 
     </div>
@@ -179,7 +183,7 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72814195-14"></script>
-    
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }

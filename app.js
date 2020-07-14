@@ -152,35 +152,38 @@ var app = (function () {
                 }
             }
 
-            self.sharePlayerData = () => {
-                navigator.permissions.query({ name: "clipboard-write" }).then(result => {
-                    if (result.state == "granted" || result.state == "prompt") {
-                        let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
+            self.shareableUrl = ko.pureComputed(() => {
+                let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
+                // return `whatsapp://send?text=${urlstr}`;
+                return `https://api.whatsapp.com/send?text=${encodeURIComponent(urlstr)}`
+            })
 
-                        navigator.clipboard.writeText(urlstr).then(function () {
-                            alert(`copied to clipboard, paste link and share`);
-                        }, function (err) {
-                            console.error('Async: Could not copy text: ', err);
-                        });
-                    }
-                });
+            // self.sharePlayerData = () => {
+            //     navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+            //         if (result.state == "granted" || result.state == "prompt") {
+            //             let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
+            //             // self.shareUrl(`whatsapp://send?text=${urlstr}`)
+            //             navigator.clipboard.writeText(urlstr).then(function () {
+            //                 alert(`copied to clipboard, paste link and share`);
+            //             }, function (err) {
+            //                 console.error('Async: Could not copy text: ', err);
+            //             });
+            //         }
+            //     });
 
-            }
+            // }
         },
 
         loadShareData = () => {
             const queryString = window.location.search, urlParams = new URLSearchParams(queryString);
             if (urlParams.has('pd')) {
                 let pd = urlParams.get('pd')
-                if (pd && pd !== ''){
+                if (pd && pd !== '') {
                     let jsnobj = JSON.parse(JSON.parse(pd));
                     jsnobj.map(obj => {
                         self.players.push(new playerDara(obj))
-                    })
-
-                    console.log(self.players())
+                    });
                 }
-                console.log(JSON.parse(pd))
             }
 
         }
