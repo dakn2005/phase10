@@ -15,17 +15,17 @@ var app = (function () {
         pics = ['jokes.png', 'chile.png', 'arif.png', 'chile2.png', 'arif2.png', 'chile3.png', 'arif3.png'],
         gamelevels = [...Array(10).keys()].map(k => k + 1), //.map(nk => `level ${nk}`),
 
-        playerDara = function (pname) {
+        playerDara = function (args) {
             let me = this;
-            me.picClickCount = ko.observable(0)
-            me.moveToNextLevel = ko.observable(false);
-            me.nextLevel = ko.observable();
-            me.imgsrc = ko.observable(pics[0]);
-            me.names = ko.observable(pname.toLowerCase().charAt(0).toUpperCase() + pname.toLowerCase().slice(1));
-            me.level = ko.observable(1);
+            me.picClickCount = ko.observable(args.picClickCount ? args.picClickCount : 0)
+            me.moveToNextLevel = ko.observable(args.moveToNextLevel ? args.moveToNextLevel : false);
+            me.nextLevel = ko.observable(args.nextLevel ? args.nextLevel : '');
+            me.imgsrc = ko.observable(args.imgsrc ? args.imgsrc : pics[0]);
+            me.names = ko.observable(args.names.toLowerCase().charAt(0).toUpperCase() + args.names.toLowerCase().slice(1));
+            me.level = ko.observable(args.level ? args.level : 1);
             me.img = ko.observable();
             me.score = ko.observable();
-            me.scores = ko.observableArray([]);
+            me.scores = ko.observableArray(args.scores ? args.scores : []);
             me.scoreTotal = ko.pureComputed(() => me.scores().map(obj => obj.score).reduce(
                 (a, n) => parseInt(a) + parseInt(n), 0
             ));
@@ -63,7 +63,7 @@ var app = (function () {
                 }
             }
 
-            me.onChange = () =>{
+            me.onChange = () => {
                 me.moveToNextLevel(false)
             }
 
@@ -73,7 +73,7 @@ var app = (function () {
                 Snackbar.show({
                     text: `${me.names()} has moved to the next level (score updated after recording current score)`,
                     pos: 'top-center',
-                    duration: 2000, 
+                    duration: 2000,
                     showAction: false,
                     customClass: 'snack-margin'
                 });
@@ -86,6 +86,11 @@ var app = (function () {
                     me.picClickCount(0);
 
                 me.imgsrc(pics[me.picClickCount()])
+            }
+
+            me.removePlayer = (p) => {
+                if (confirm(`Remove ${p.names()} from the game?`))
+                    self.players.remove(p)
             }
         },
 
@@ -115,7 +120,9 @@ var app = (function () {
                 if (!self.playerName() || self.playerName() == '')
                     alert('You must enter player name')
                 else {
-                    self.players.push(new playerDara(self.playerName()));
+                    self.players.push(new playerDara({
+                        names: self.playerName()
+                    }));
                     self.playerName('')
                 }
             }
@@ -138,23 +145,51 @@ var app = (function () {
                 }
             }
 
-            self.reset = () => {
+            self.resetAll = () => {
                 if (confirm('Reset game, remove all players?')) {
                     self.playerName('')
                     self.players([])
                 }
             }
 
-            self.removePlayer = (p) => {
-                if (confirm(`Remove ${p.names()} from the game?`))
-                    self.players.remove(p)
+            self.sharePlayerData = () => {
+                navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+                    if (result.state == "granted" || result.state == "prompt") {
+                        let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
+
+                        navigator.clipboard.writeText(urlstr).then(function () {
+                            alert(`copied to clipboard, paste link and share`);
+                        }, function (err) {
+                            console.error('Async: Could not copy text: ', err);
+                        });
+                    }
+                });
+
             }
         },
 
-        anza = () => {
-            ko.applyBindings(new vm(), document.getElementById('bory'))
-            // document.getElementById('btnadd').click();
+        loadShareData = () => {
+            const queryString = window.location.search, urlParams = new URLSearchParams(queryString);
+            if (urlParams.has('pd')) {
+                let pd = urlParams.get('pd')
+                if (pd && pd !== ''){
+                    let jsnobj = JSON.parse(JSON.parse(pd));
+                    jsnobj.map(obj => {
+                        self.players.push(new playerDara(obj))
+                    })
+
+                    console.log(self.players())
+                }
+                console.log(JSON.parse(pd))
+            }
+
         }
+
+    anza = () => {
+        ko.applyBindings(new vm(), document.getElementById('bory'))
+        // document.getElementById('btnadd').click();
+        loadShareData();
+    }
 
     return { anza: anza }
 

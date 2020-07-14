@@ -149,9 +149,14 @@
                 Reset Scores
             </button> -->
 
-            <button id='btnadd' data-bind="click: reset"
+            <button id='btnreset' data-bind="click: resetAll"
                 class="bg-red-300 hover:bg-red-400 text-black font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded ml-4 md:w-56">
                 Reset
+            </button>
+            
+            <button data-bind="click: sharePlayerData" class="border-transparent text-sm rounded ml-4 bg-gray-100 border-b-4 border-gray-200 py-2 px-4 md:w-32 flex-shrink-2">
+                <i class="fa fa-share-alt" aria-hidden="true"></i> 
+                <span class="share">share</span>
             </button>
         </div>
 
@@ -168,8 +173,8 @@
     <script src="assets/plugins/snackbar/jquery-2.2.0.min.js"></script>
     <script src="assets/plugins/snackbar/materialize.min.js"></script>
     <script src="assets/plugins/snackbar/snackbar.min.js"></script>
-    <script type='text/javascript'
-        src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js'></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js'></script> -->
     <script src="app.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
