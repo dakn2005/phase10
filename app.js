@@ -158,7 +158,7 @@ var app = (function () {
                         let urlstr = location.href + '?pd=' + JSON.stringify(ko.toJSON(self.players()));
 
                         navigator.clipboard.writeText(urlstr).then(function () {
-                            alert(`copied to clipboard, paste link to share`);
+                            alert(`current game copied to clipboard, paste link to share`);
                         }, function (err) {
                             console.error('Async: Could not copy text: ', err);
                         });
